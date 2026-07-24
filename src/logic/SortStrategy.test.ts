@@ -44,8 +44,11 @@ it("sort: 未知のキーを渡すと例外", () => {
   ];
   const invalidKey = "invalid" as any;
 
-  // Act & Assert
-  expect(() => s.sort(items, invalidKey)).toThrow();
+  // Act
+  const act = () => s.sort(items, invalidKey);
+
+  // Assert
+  expect(act).toThrow();
 });
 
 });
