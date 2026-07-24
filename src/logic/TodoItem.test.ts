@@ -34,4 +34,49 @@ describe("TodoItem", () => {
   // ここから先は自分で考えて追加しよう。
   // 本体 (TodoItem.ts) を読み、まだテストされていないメソッド
   // (isOverdue / priorityWeight など) を観点別にテストする。
+
+
+   it("isOverdue: 期限が過去ならtrue", () => {
+    // Arrange
+    const item = new TodoItem({
+      id: "1",
+      title: "x",
+      dueDate: new Date("2020-01-01"),
+    });
+    const now = new Date("2024-01-01");
+    // Act
+    const result = item.isOverdue(now);
+    // Assert
+    expect(result).toBe(true);
+  });
+
+  it("isOverdue: 完了済みなら期限が過去でもfalse", () => {
+    // Arrange
+    const item = new TodoItem({
+      id: "1",
+      title: "x",
+      done: true,  
+      dueDate: new Date("2020-01-01"),
+    });
+    const now = new Date("2024-01-01");
+    // Act
+    const result = item.isOverdue(now);
+    // Assert
+    expect(result).toBe(false);
+  });
+
+   it("isOverdue: 期限なしならfalse", () => {
+    const item = new TodoItem({
+      id: "1",
+      title: "x",
+      dueDate: null,
+    });
+    const now = new Date("2024-01-01");
+    // Act
+    const result = item.isOverdue(now);
+    // Assert
+    expect(result).toBe(false);
+  });
+
+
 });
